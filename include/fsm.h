@@ -74,7 +74,8 @@ typedef int (*fsm_guard_t)(struct fsm* fsm, void* data);
  */
 typedef struct fsm_transition {
 	fsm_guard_t  guard;               ///< Optional guard function (NULL if none).
-	fsm_action_t action;              ///< Optional action function (NULL if none).
+	fsm_action_t on_exit;             ///< Optional action executed when exiting the source state (NULL if none).
+	fsm_action_t on_entry;            ///< Optional action executed when entering the target state (NULL if none).
 	uint32_t     source_states_mask;  ///< Bitmask of source states.
 	uint8_t      target_state;        ///< Target state enum value.
 	uint8_t      event;               ///< The event that triggers this transition.
@@ -86,6 +87,7 @@ typedef struct fsm_transition {
  */
 typedef struct fsm {
 	void*                   userdata;          ///< Pointer to user-defined data.
+	fsm_action_t            cleanup;           ///< Pointer to the cleanup function.
 	const fsm_transition_t* transition_rules;  ///< Pointer to the FSM transition rules list.
 	size_t                  transition_count;  ///< Number of rules in the transition_rules list.
 	uint8_t                 current_state;     ///< Current state of the FSM.

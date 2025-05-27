@@ -64,14 +64,16 @@ static const fsm_transition_t transitions[] = {
         .source_states_mask = FSM_STATES_MASK(STATE_INIT, STATE_STOP),
         .target_state       = STATE_RUN,
         .guard              = NULL,
-        .action             = action_start,
+        .on_entry           = action_start,
+        .on_exit            = NULL,
     },
     {
         .event              = EVENT_STOP,
         .source_states_mask = FSM_STATE_MASK(STATE_RUN),
         .target_state       = STATE_STOP,
         .guard              = NULL,
-        .action             = action_stop,
+        .on_entry           = action_stop,
+        .on_exit            = NULL,
     },
 };
 ```

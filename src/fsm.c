@@ -39,9 +39,10 @@ fsm_result_t fsm_init(fsm_t* self, uint8_t initial_state, const fsm_transition_t
 		}
 	}
 
-	self->current_state    = initial_state;
+	self->cleanup          = NULL;
 	self->transition_rules = transition_rules;
 	self->transition_count = transition_count;
+	self->current_state    = initial_state;
 	return FSM_RESULT_SUCCESS;
 }
 
@@ -51,14 +52,16 @@ fsm_result_t fsm_process_event(fsm_t* self, uint8_t event, void* data) {
 	for (size_t i = 0; i < self->transition_count; i++) {
 		const fsm_transition_t* rule = &self->transition_rules[i];
 		if (rule->event == event && FSM_STATE_IN_MASK(self->current_state, rule->source_states_mask)) {
-			if (rule->guard) {
-				if (rule->guard(self, data) != 0) {
-					return FSM_RESULT_GUARD_DENIED;
-				}
+			if (rule->guard && rule->guard(self, data) != 0) {
+				return FSM_RESULT_GUARD_DENIED;
 			}
+			if (self->cleanup) {
+				self->cleanup(self, data);
+			}
+			self->cleanup       = rule->on_entry;
 			self->current_state = rule->target_state;
-			if (rule->action) {
-				rule->action(self, data);
+			if (rule->on_entry) {
+				rule->on_entry(self, data);
 			}
 			return FSM_RESULT_SUCCESS;
 		}

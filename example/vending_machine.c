@@ -75,9 +75,10 @@ static void process_event_and_display_status(fsm_t* fsm, Event event, void* data
  */
 static const fsm_transition_t transitions[] = {
 	{
-		.event  = EVENT_INSERT_COIN,
-		.guard  = NULL,  // Inserting a coin is always allowed
-		.action = add_coin_action,
+		.event    = EVENT_INSERT_COIN,
+		.guard    = NULL,  // Inserting a coin is always allowed
+		.on_entry = add_coin_action,
+		.on_exit  = NULL,  // No cleanup needed when leaving IDLE or ACCEPTING for this specific event path
 		.source_states_mask =
 			FSM_STATES_MASK(STATE_IDLE, STATE_ACCEPTING),  // Can insert coin in IDLE or ACCEPTING state
 		.target_state = STATE_ACCEPTING,                   // Enter ACCEPTING state after inserting coin
@@ -85,21 +86,24 @@ static const fsm_transition_t transitions[] = {
 	{
 		.event              = EVENT_SELECT_ITEM,
 		.guard              = can_dispense_guard,  // Must pass guard check (stock/balance)
-		.action             = start_dispense_action,
+		.on_entry           = start_dispense_action,
+		.on_exit            = NULL,                             // Use on_exit here
 		.source_states_mask = FSM_STATE_MASK(STATE_ACCEPTING),  // Can only select item in ACCEPTING state
 		.target_state       = STATE_DISPENSING,                 // Enter DISPENSING state after successful selection
 	},
 	{
 		.event              = EVENT_DISPENSE_DONE,
 		.guard              = NULL,
-		.action             = return_change_action,
+		.on_entry           = return_change_action,
+		.on_exit            = NULL,  // No specific cleanup for DISPENSING state before going to IDLE
 		.source_states_mask = FSM_STATE_MASK(STATE_DISPENSING),  // Can only complete dispensing in DISPENSING state
 		.target_state       = STATE_IDLE,                        // Return to IDLE state after completion
 	},
 	{
 		.event              = EVENT_CANCEL,
 		.guard              = NULL,
-		.action             = refund_action,
+		.on_entry           = refund_action,
+		.on_exit            = NULL,                             // Use on_exit here
 		.source_states_mask = FSM_STATE_MASK(STATE_ACCEPTING),  // Can only cancel in ACCEPTING state
 		.target_state       = STATE_IDLE,                       // Return to IDLE state after cancellation
 	},
