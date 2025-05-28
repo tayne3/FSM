@@ -1,9 +1,12 @@
 [English](README.md) | 中文
 
-# 🧩 FSM: A Simple C Finite State Machine
+# FSM
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![CMake](https://img.shields.io/badge/CMake-3.12%2B-brightgreen)
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/tayne3/FSM)
+[![Release](https://img.shields.io/github/v/release/tayne3/FSM?color=%23ff8936&logo=fitbit&style=flat-square)](https://github.com/tayne3/FSM/releases)
+[![Tag](https://img.shields.io/github/v/tag/tayne3/FSM?color=%23ff8936&logo=fitbit&style=flat-square)](https://github.com/tayne3/FSM/tags)
 
 FSM 是一个用C语言开发的简易有限状态机 (Finite State Machine) 库，其设计目标是提供一个清晰、易于理解且易于集成的FSM实现，让你能够专注于业务逻辑，而不是被复杂的状态管理细节所困扰。
 
