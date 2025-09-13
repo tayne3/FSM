@@ -4,26 +4,33 @@ Language: Cpp
 # 基于已有代码风格: LLVM, Google, Chromium, Mozilla, WebKit, ...
 BasedOnStyle: Google
 # 访问修饰符(public、private等)的缩进宽度
-AccessModifierOffset: -4
-# 左方括号后换行时,对齐括号: 
-#   Align(对齐), DontAlign(不对齐), AlwaysBreak(总是换行), BlockIndent(块缩进)
-AlignAfterOpenBracket: Align
-# 对齐连续的赋值语句
-AlignConsecutiveAssignments: true
+AccessModifierOffset: -1
+# 左方括号后换行时,对齐括号
+AlignAfterOpenBracket: true
+
+# 允许重新格式化注释
+ReflowComments: true
+# 允许排序#include语句
+SortIncludes: true
+
 # 对齐连续的变量声明
 AlignConsecutiveDeclarations: true
-# 连续声明的变量名对齐
-AlignEscapedNewlinesLeft: true
-# 对齐二元和三元表达式的操作数
-AlignOperands: true
-# 对齐连续的尾随注释
-AlignTrailingComments: true
+# 对齐连续的赋值语句
+AlignConsecutiveAssignments: true
 # 对齐连续的宏定义
 AlignConsecutiveMacros: true
+# 连续声明的变量名对齐
+AlignEscapedNewlinesLeft: true
+# 对齐连续的尾随注释
+AlignTrailingComments: true
 # 对齐转义换行符
 AlignEscapedNewlines: Left
+
 # 允许函数声明/定义的所有参数在放在下一行
-AllowAllParametersOfDeclarationOnNextLine: true
+AllowAllParametersOfDeclarationOnNextLine: false
+# 对齐二元和三元表达式的操作数
+AlignOperands: true
+
 # 允许短的块放在同一行
 AllowShortBlocksOnASingleLine: true
 # 允许短的case标签放在同一行
@@ -36,8 +43,8 @@ AllowShortFunctionsOnASingleLine: Inline
 AllowShortIfStatementsOnASingleLine: false
 # 允许短的循环保持在同一行
 AllowShortLoopsOnASingleLine: false
-# 始终在定义返回类型后换行: 
-#   None(不在返回类型后自动换行), All(在所有函数定义的返回类型后换行)
+
+# 始终在定义返回类型后换行: None(不在返回类型后自动换行), All(在所有函数定义的返回类型后换行)
 AlwaysBreakAfterDefinitionReturnType: None
 # 始终在多行字符串之前换行
 AlwaysBreakBeforeMultilineStrings: false
@@ -47,10 +54,6 @@ AlwaysBreakTemplateDeclarations: false
 BinPackArguments: true
 # 允许函数定义中的参数打包
 BinPackParameters: true
-# 允许重新格式化注释
-ReflowComments: true
-# 允许排序#include语句
-SortIncludes: true
 
 # 在二元运算符前换行:
 #   None(在操作符后换行), NonAssignment(在非赋值的操作符前换行),
@@ -186,4 +189,3 @@ Standard: Auto
 TabWidth: 4
 # 使用tab字符: Never, ForIndentation, ForContinuationAndIndentation, Always
 UseTab: ForContinuationAndIndentation
-...

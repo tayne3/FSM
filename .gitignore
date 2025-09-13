@@ -120,6 +120,8 @@ bld/
 [Bb]in/
 [Oo]bj/
 # [Ll]ib/
+out/
+cmake-build-*/
 
 # Visual Studio 2015 cache/options directory
 .vs/
@@ -351,7 +353,3 @@ _Pvt_Extensions
 
 # CPM modules
 cmake_modules/
-
-# Doxyfile configure file
-Doxyfile
-ProjectInfo

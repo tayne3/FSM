@@ -23,12 +23,13 @@
  */
 #ifndef FSM_H
 #define FSM_H
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 #include <stddef.h>
 #include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 // F(code, name, description)
 #define FSM_RESULT_FOREACH(F)                                                                                    \
